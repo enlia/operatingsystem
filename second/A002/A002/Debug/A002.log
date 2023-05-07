@@ -1,0 +1,40 @@
+﻿生成启动时间为 2023/5/7 23:09:07。
+     1>项目“C:\files\OperatingSystem\SolveByMyself\second\A002\A002\A002.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Debug\A002.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\files\OperatingSystem\SolveByMyself\second\Source /IC:\files\OperatingSystem\SolveByMyself\second\Port /IC:\files\OperatingSystem\SolveByMyself\second\App /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\App\Test.C
+         Test.C
+       ManifestResourceCompile:
+         所有输出均为最新。
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\files\OperatingSystem\SolveByMyself\second\A002\Debug\A002.exe" /INCREMENTAL /NOLOGO winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\A002.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\files\OperatingSystem\SolveByMyself\second\A002\Debug\A002.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\files\OperatingSystem\SolveByMyself\second\A002\Debug\A002.lib" /MACHINE:X86 Debug\A002.exe.embed.manifest.res
+         Debug\Test.obj
+         Debug\os_cpu_c.obj
+         Debug\pc.obj
+         Debug\os_core.obj
+         Debug\os_dbg_r.obj
+         Debug\os_flag.obj
+         Debug\os_mbox.obj
+         Debug\os_mem.obj
+         Debug\os_mutex.obj
+         Debug\os_q.obj
+         Debug\os_sem.obj
+         Debug\os_task.obj
+         Debug\os_time.obj
+         Debug\os_tmr.obj
+         Debug\ucos_ii.obj
+       Manifest:
+         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\A002.exe.embed.manifest" /manifest Debug\A002.exe.intermediate.manifest
+         所有输出均为最新。
+       LinkEmbedManifest:
+         所有输出均为最新。
+         A002.vcxproj -> C:\files\OperatingSystem\SolveByMyself\second\A002\Debug\A002.exe
+       FinalizeBuildStatus:
+         正在删除文件“Debug\A002.unsuccessfulbuild”。
+         正在对“Debug\A002.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“C:\files\OperatingSystem\SolveByMyself\second\A002\A002\A002.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.33

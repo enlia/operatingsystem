@@ -107,7 +107,7 @@ void  TaskStart (void *pdata)
 {
     char  s[40];
 	INT16S     key;
-
+	INT8U err; 
     pdata = pdata;                                         /* Prevent compiler warning                 */
 
     /* Setup the display  */
@@ -115,7 +115,7 @@ void  TaskStart (void *pdata)
     PC_DispStr( 0,  1, " 版权申明:                                                                      ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     PC_DispStr( 0,  2, "  1.内核源码由Jean J. Labrosse提供                                              ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     PC_DispStr( 0,  3, "  2.x86-Win32平台移植由Werner Zimmermann提供                                    ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
-    PC_DispStr( 0,  4, "                                                                                ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
+    PC_DispStr( 0,  4, "                                            21111301083 房尚鹏                  ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     PC_DispStr( 0,  5, "                                                                                ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     PC_DispStr( 0,  6, "  CH2 任务状态转换                                                              ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     PC_DispStr( 0,  7, "                                                                                ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
@@ -130,7 +130,7 @@ void  TaskStart (void *pdata)
     PC_DispStr( 0, 16, "     MyTask4                                                                    ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     PC_DispStr( 0, 17, "     MyTask5                                                                    ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     PC_DispStr( 0, 18, "                                                                                ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
-    PC_DispStr( 0, 19, "                                                                                ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
+    PC_DispStr( 0, 19, "							                                                    ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     PC_DispStr( 0, 20, "                                                                                ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     PC_DispStr( 0, 21, "                                                                                ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     PC_DispStr( 0, 22, "    总任务数  :          CPU占用率:      %                                      ", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
@@ -159,6 +159,19 @@ void  TaskStart (void *pdata)
             }
         }
 
+
+		err = OSTaskQuery (11, &tcb_copy);
+        printf("任务状态:  MyTask1 %d | ",tcb_copy.OSTCBStat);
+        err = OSTaskQuery (12, &tcb_copy);
+        printf("MyTask2 %d | ",tcb_copy.OSTCBStat);
+        err = OSTaskQuery (13, &tcb_copy);
+        printf("MyTask3 %d | ",tcb_copy.OSTCBStat);
+        err = OSTaskQuery (14, &tcb_copy);
+        printf("MyTask4 %d | ",tcb_copy.OSTCBStat);
+        err = OSTaskQuery (15, &tcb_copy);
+        printf("MyTask5 %d\n",tcb_copy.OSTCBStat);
+
+
         /* ToDo: Don't forget to call the uCOS scheduler with OSTimeDly etc., to give other tasks a chance to run */
 		OSTimeDly(100);                                    /* Wait 100 ticks                           */
     }
@@ -174,7 +187,7 @@ void MyTask1(void *pdata)
 { 
     pdata = pdata;                            /* Prevent compiler warning      */
     while (1) { 
-        
+        printf("MyTask1 is running \n");
 
         OSTimeDly(150);                       /* Wait 150 ticks                  */
     }
@@ -189,7 +202,7 @@ void MyTask2(void *pdata)
 { 
     pdata = pdata;                            /* Prevent compiler warning      */
     while (1) { 
-        
+        printf("MyTask2 is running \n");
 
         OSTimeDly(120);                       /* Wait 120 ticks                  */
     }
@@ -205,7 +218,7 @@ void MyTask3(void *pdata)
 { 
     pdata = pdata;                            /* Prevent compiler warning      */
     while (1) { 
-        
+        printf("MyTask3 is running \n");
 
         OSTimeDly(90);                       /* Wait 90 ticks                  */
     }
@@ -220,7 +233,7 @@ void MyTask4(void *pdata)
 { 
     pdata = pdata;                            /* Prevent compiler warning      */
     while (1) { 
-
+		printf("MyTask4 is running \n");
 
         OSTimeDly(70);                       /* Wait 70 ticks                  */
     }
@@ -236,7 +249,7 @@ void MyTask5(void *pdata)
 { 
     pdata = pdata;                            /* Prevent compiler warning      */
     while (1) { 
-        
+        printf("MyTask5 is running \n");
 
         OSTimeDly(30);                       /* Wait 30 ticks                  */
     }
@@ -250,12 +263,16 @@ void MyTask5(void *pdata)
 void  TaskClock (void *pdata)
 {
 	char  s[40];
+	INT8U   i;
 
     pdata = pdata;
     for (;;) {
         PC_GetDateTime(s);
         PC_DispStr(18, 24, s, DISP_FGND_YELLOW + DISP_BGND_BLUE);
-
+   
+		for (i = 0; i < 7; i++) {                               /* Display task user data                  */
+			DispTaskStat(i);                                
+		}
         OSTimeDly(OS_TICKS_PER_SEC);
     }
 }
@@ -273,7 +290,12 @@ void  DispTaskStat (INT8U id)
 	char  s[80];
 
 	err = OSTaskQuery (id+9, &tcb_copy);
-    sprintf(s, "         %02x             %5d", tcb_copy.OSTCBStat, tcb_copy.OSTCBDly);
+	if(tcb_copy.OSTCBStat==0 && tcb_copy.OSTCBDly<=10){
+	    sprintf(s, "         %02x             %5d		Ready", tcb_copy.OSTCBStat, tcb_copy.OSTCBDly);
+	}
+	else{
+		sprintf(s, "         %02x             %5d		Waiting", tcb_copy.OSTCBStat, tcb_copy.OSTCBDly);
+	}
     PC_DispStr(13, (INT8U) (id+11), s, DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
 }
 
@@ -284,11 +306,11 @@ void  DispTaskStat (INT8U id)
 */
 void  OSTaskStatHook (void)
 {
-    INT8U   i;
+    //INT8U   i;
    
-    for (i = 0; i < 7; i++) {                               /* Display task user data                  */
-        DispTaskStat(i);                                
-    }
+    //for (i = 0; i < 7; i++) {                               /* Display task user data                  */
+    //    DispTaskStat(i);                                
+    //}
 }
 
 /*

@@ -29,6 +29,8 @@
 
 OS_STK        TaskStartStk[TASK_STK_SIZE];	/* Start task's stack				       */
 
+OS_TCB  tcb_copy;
+
 /*
 *********************************************************************************************************
 *                                           FUNCTION PROTOTYPES
@@ -62,7 +64,9 @@ int main (void)
 *********************************************************************************************************
 */
 void  TaskStart (void *pdata)
-{   INT16S key;
+{   
+	INT8U err;
+	INT16S key;
     pdata = pdata;                                         /* Prevent compiler warning                 */
 
 
@@ -84,7 +88,8 @@ void  TaskStart (void *pdata)
     {
 	/* ToDo: Place additional code for your startup task, which you want to run once or periodically here */
 
-        printf("Now running for %6u ticks - press ESC to stop\n", OSTime);
+        //printf("Now running for %6u ticks - press ESC to stop\n", OSTime);
+		printf("Now running for %6u ticks   CPU利用率:%3d %%   任务数:%3d - press ESC to stop\n", OSTime, OSCPUUsage, OSTaskCtr);
 
         if (PC_GetKey(&key) == TRUE) {                     /* See if key has been pressed              */
             if (key == 0x1B) {                             /* Yes, see if it's the ESCAPE key          */
@@ -93,6 +98,6 @@ void  TaskStart (void *pdata)
         }
 
         /* ToDo: Don't forget to call the uCOS scheduler with OSTimeDly etc., to give other tasks a chance to run */
-        OSTimeDly(100);                        		   /* Wait 100 ticks                           */
+        OSTimeDly(200);                        		   /* Wait 200 ticks                           */
     }
 }
