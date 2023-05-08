@@ -8,6 +8,7 @@
 */
 #define _CRT_SECURE_NO_WARNINGS
 #include "includes.h"
+#include "app_queue.h"
 //#include "app_queue.h"
 
 /*
@@ -63,7 +64,8 @@ OS_EVENT       *Semp;               //定义信号量
 OS_EVENT       *MsgQ;               //定义消息队列
 void           *MsgQStr[20];        //定义消息指针数组
 
-//APP_QUEUE       Buffer;             //定义缓冲池
+
+APP_QUEUE       Buffer;             //定义缓冲池
 
 /*
 *********************************************************************************************************
@@ -91,6 +93,7 @@ void  UpdateTaskData(INT8U id);
 
 int main (void)
 {
+	APPInitQueue(&Buffer);					//初始化缓冲池
     PC_DispClrScr(DISP_BGND_BLACK);                        /* Clear the screen                         */
 
     OSInit();                                              /* Initialize uC/OS-II                      */

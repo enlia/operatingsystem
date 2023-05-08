@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FDE017E0-68A3-45E1-A00D-9C335E9F9046}</ProjectGuid>
+    <ProjectGuid>{EB1F80E2-595F-405C-899E-0BFE9725271C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>A003</RootNamespace>
   </PropertyGroup>
@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -50,10 +50,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\GIT\operatingsystem\third\Source;C:\GIT\operatingsystem\third\Port;C:\GIT\operatingsystem\third\App;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,6 +76,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\App\app_queue.c" />
+    <ClCompile Include="..\..\App\TEST.C" />
+    <ClCompile Include="..\..\Port\os_cpu_c.c" />
+    <ClCompile Include="..\..\Port\pc.c" />
+    <ClCompile Include="..\..\Source\os_core.c" />
+    <ClCompile Include="..\..\Source\os_dbg_r.c" />
+    <ClCompile Include="..\..\Source\os_flag.c" />
+    <ClCompile Include="..\..\Source\os_mbox.c" />
+    <ClCompile Include="..\..\Source\os_mem.c" />
+    <ClCompile Include="..\..\Source\os_mutex.c" />
+    <ClCompile Include="..\..\Source\os_q.c" />
+    <ClCompile Include="..\..\Source\os_sem.c" />
+    <ClCompile Include="..\..\Source\os_task.c" />
+    <ClCompile Include="..\..\Source\os_time.c" />
+    <ClCompile Include="..\..\Source\os_tmr.c" />
+    <ClCompile Include="..\..\Source\ucos_ii.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\App\app_cfg.h" />
+    <ClInclude Include="..\..\App\app_queue.h" />
+    <ClInclude Include="..\..\App\INCLUDES.H" />
+    <ClInclude Include="..\..\App\OS_CFG.H" />
+    <ClInclude Include="..\..\Port\os_cpu.h" />
+    <ClInclude Include="..\..\Port\pc.h" />
+    <ClInclude Include="..\..\Source\os.h" />
+    <ClInclude Include="..\..\Source\os_cfg_r.h" />
+    <ClInclude Include="..\..\Source\ucos_ii.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
