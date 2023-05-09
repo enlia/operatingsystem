@@ -61,9 +61,11 @@ OS_TCB  tcb_copy;                   //定义用来复制被查询任务的TCB
 TASK_USER_DATA  TaskUserData[5];    //对5个用户任务定义结构体数组
 
 OS_EVENT       *Semp;               //定义信号量
+OS_EVENT	   *SempConsumption;			//满:>生产者停止,消费者继续
+OS_EVENT	   *SempProduce;			//空:>消费者停止,生产者继续
 OS_EVENT       *MsgQ;               //定义消息队列
 void           *MsgQStr[20];        //定义消息指针数组
-
+OS_EVENT	   *Mutex;				//互斥信号量
 
 APP_QUEUE       Buffer;             //定义缓冲池
 
@@ -93,13 +95,19 @@ void  UpdateTaskData(INT8U id);
 
 int main (void)
 {
+	INT8U	err;
 	APPInitQueue(&Buffer);					//初始化缓冲池
     PC_DispClrScr(DISP_BGND_BLACK);                        /* Clear the screen                         */
 
     OSInit();                                              /* Initialize uC/OS-II                      */
 
 	/* ToDo: Create semaphores, mailboxes etc. here						       */
-	Semp = OSSemCreate(0);                   //创建初值为0的信号量
+	//Semp = OSSemCreate(0);                   //创建初值为0的信号量
+
+	SempConsumption=OSSemCreate(0);					//只要还能pend就说明还能消费			针对消费者
+	SempProduce=OSSemCreate(APP_QUEUE_SIZE);		//只要还能pend，就说明还能生产			针对生产者
+	Mutex=OSMutexCreate(1,&err);					//一开始置一,后面要使用的时候就pend,小于0的时候就互斥
+
 	MsgQ = OSQCreate(&MsgQStr[0], 20);       //创建消息队列
 
     OSTaskCreate(TaskStart, (void *)0, &TaskStartStk[TASK_STK_SIZE - 1], TASK_START_PRIO);	/* Create the startup task */
@@ -190,6 +198,10 @@ void  TaskStart (void *pdata)
 *                                               TASK #1
 *********************************************************************************************************
 */
+
+
+//以下修改为一个生产者,两个消费者
+
 void MyTask1(void *pdata)
 { 
     INT8U  err, count = 0;
@@ -198,6 +210,7 @@ void MyTask1(void *pdata)
 	pdata = pdata;                            /* Prevent compiler warning      */
 	PC_DispStr(10, 16, "MyTask1", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
     while (1) {
+		OSSemPend(SempProduce,0,&err);		//信号量p操作，在确定可以可以生产后，申请mutex为总量加1
         PC_DispStr(20, 16, "Computing ", DISP_FGND_YELLOW + DISP_BGND_BLUE);
 		PC_DispStr(20, 17, "Waiting for Task1", DISP_FGND_YELLOW + DISP_BGND_BLUE);
 		if (count == 5) {
@@ -212,6 +225,13 @@ void MyTask1(void *pdata)
 			count++;
 		}
 
+
+		OSMutexPend(Mutex,0,&err);			//申请互斥信号量
+		APPEnQueue(&Buffer,1);				//进入队列
+		err=OSMutexPost(Mutex);				//解开互斥
+		err=OSSemPost(SempConsumption);			//消费者可消费数量加1
+
+
         OSTimeDly(150);                       /* Wait 150 ticks                  */
     }
 }
@@ -220,16 +240,23 @@ void MyTask1(void *pdata)
 *********************************************************************************************************
 *                                               TASK #2
 *********************************************************************************************************
-*/
-void MyTask2(void *pdata)
+*///SempEmpty
+void MyTask2(void *pdata)			//消费
 { 
     INT8U  err;
 	
 	pdata = pdata;                            /* Prevent compiler warning      */
 	PC_DispStr(10, 17, "MyTask2", DISP_FGND_BLACK + DISP_BGND_LIGHT_GRAY);
 	while (1) { 
-        OSSemPend(Semp, 0, &err);     //请求信号量
+        OSSemPend(SempProduce, 0, &err);     //请求信号量
 		PC_DispStr(20, 17, " Get the result! ", DISP_FGND_YELLOW + DISP_BGND_BLUE);
+		OSMutexPend(Mutex,0,&err);
+
+		APPEnQueue(&Buffer,1);
+
+		err=OSMutexPost(Mutex);
+		err=OSSemPost(SempConsumption);
+		
 
         OSTimeDly(120);                       /* Wait 120 ticks                  */
     }
@@ -243,8 +270,16 @@ void MyTask2(void *pdata)
 */
 void MyTask3(void *pdata)
 {
+	INT8U err;
 	pdata = pdata;                            /* Prevent compiler warning      */
 	while (1) {
+		OSSemPend(SempConsumption,0,&err);
+
+		OSMutexPend(Mutex,0,&err);
+		APPDeQueue(&Buffer);					//出队
+
+		err=OSMutexPost(Mutex);
+		err=OSSemPost(SempProduce);
 
         OSTimeDly(90);                       /* Wait 90 ticks                  */
     }

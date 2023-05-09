@@ -1,32 +1,15 @@
-﻿生成启动时间为 2023/5/8 15:54:20。
+﻿生成启动时间为 2023/5/9 23:28:34。
      1>项目“C:\GIT\operatingsystem\third\A003\A003\A003.vcxproj”在节点 2 上(build 个目标)。
-     1>PrepareForBuild:
-         正在创建目录“C:\GIT\operatingsystem\third\A003\Debug\”。
-       InitializeBuildStatus:
+     1>InitializeBuildStatus:
          正在创建“Debug\A003.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\GIT\operatingsystem\third\Source /IC:\GIT\operatingsystem\third\Port /IC:\GIT\operatingsystem\third\App /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\App\TEST.C ..\..\Port\os_cpu_c.c ..\..\Port\pc.c ..\..\Source\os_core.c ..\..\Source\os_dbg_r.c ..\..\Source\os_flag.c ..\..\Source\os_mbox.c ..\..\Source\os_mem.c ..\..\Source\os_mutex.c ..\..\Source\os_q.c ..\..\Source\os_sem.c ..\..\Source\os_task.c ..\..\Source\os_time.c ..\..\Source\os_tmr.c ..\..\Source\ucos_ii.c
-         ucos_ii.c
-         os_tmr.c
-         os_time.c
-         os_task.c
-         os_sem.c
-         os_q.c
-         os_mutex.c
-         os_mem.c
-         os_mbox.c
-         os_flag.c
-         os_dbg_r.c
-         os_core.c
-         pc.c
-         os_cpu_c.c
-         INFO: Hook functions must be defined in the application
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\GIT\operatingsystem\third\Source /IC:\GIT\operatingsystem\third\Port /IC:\GIT\operatingsystem\third\App /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\App\TEST.C
          TEST.C
-         正在生成代码...
        ManifestResourceCompile:
-         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\A003.exe.embed.manifest.res" Debug\A003_manifest.rc 
+         所有输出均为最新。
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\GIT\operatingsystem\third\A003\Debug\A003.exe" /INCREMENTAL /NOLOGO winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\A003.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\GIT\operatingsystem\third\A003\Debug\A003.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\GIT\operatingsystem\third\A003\Debug\A003.lib" /MACHINE:X86 Debug\A003.exe.embed.manifest.res
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\GIT\operatingsystem\third\A003\Debug\A003.exe" /INCREMENTAL /NOLOGO winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\A003.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\GIT\operatingsystem\third\A003\Debug\A003.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\GIT\operatingsystem\third\A003\Debug\A003.lib" /MACHINE:X86 Debug\A003.exe.embed.manifest.res
+         Debug\app_queue.obj
          Debug\TEST.obj
          Debug\os_cpu_c.obj
          Debug\pc.obj
@@ -44,24 +27,9 @@
          Debug\ucos_ii.obj
        Manifest:
          c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\A003.exe.embed.manifest" /manifest Debug\A003.exe.intermediate.manifest
-         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\A003.exe.embed.manifest.res" Debug\A003_manifest.rc 
+         所有输出均为最新。
        LinkEmbedManifest:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\GIT\operatingsystem\third\A003\Debug\A003.exe" /INCREMENTAL /NOLOGO winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\A003.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\GIT\operatingsystem\third\A003\Debug\A003.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\GIT\operatingsystem\third\A003\Debug\A003.lib" /MACHINE:X86 Debug\A003.exe.embed.manifest.res
-         Debug\TEST.obj
-         Debug\os_cpu_c.obj
-         Debug\pc.obj
-         Debug\os_core.obj
-         Debug\os_dbg_r.obj
-         Debug\os_flag.obj
-         Debug\os_mbox.obj
-         Debug\os_mem.obj
-         Debug\os_mutex.obj
-         Debug\os_q.obj
-         Debug\os_sem.obj
-         Debug\os_task.obj
-         Debug\os_time.obj
-         Debug\os_tmr.obj
-         Debug\ucos_ii.obj
+         所有输出均为最新。
          A003.vcxproj -> C:\GIT\operatingsystem\third\A003\Debug\A003.exe
        FinalizeBuildStatus:
          正在删除文件“Debug\A003.unsuccessfulbuild”。
@@ -70,4 +38,4 @@
 
 生成成功。
 
-已用时间 00:00:11.51
+已用时间 00:00:01.46
