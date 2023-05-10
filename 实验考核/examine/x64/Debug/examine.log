@@ -1,0 +1,8 @@
+﻿  myBanker.cpp
+C:\GIT\operatingsystem\实验考核\examine\myBanker.cpp(202,11): warning C4473: “printf”: 没有为格式字符串传递足够的参数
+C:\GIT\operatingsystem\实验考核\examine\myBanker.cpp(202,11): message : 占位符和其参数预计 1 可变参数，但提供的却是 0 参数
+C:\GIT\operatingsystem\实验考核\examine\myBanker.cpp(202,11): message : 缺失的可变参数 1 为格式字符串“%d”所需
+C:\GIT\operatingsystem\实验考核\examine\myBanker.cpp(208,12): warning C4473: “printf”: 没有为格式字符串传递足够的参数
+C:\GIT\operatingsystem\实验考核\examine\myBanker.cpp(208,12): message : 占位符和其参数预计 1 可变参数，但提供的却是 0 参数
+C:\GIT\operatingsystem\实验考核\examine\myBanker.cpp(208,12): message : 缺失的可变参数 1 为格式字符串“%d”所需
+  examine.vcxproj -> C:\GIT\operatingsystem\实验考核\examine\x64\Debug\examine.exe
